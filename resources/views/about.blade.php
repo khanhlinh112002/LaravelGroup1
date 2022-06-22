@@ -1,0 +1,1 @@
+{{Session::get('user.name')}}

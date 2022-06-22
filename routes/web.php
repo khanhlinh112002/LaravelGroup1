@@ -8,7 +8,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\DatabaseController;
 
 
-
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Route;
 
@@ -48,13 +48,17 @@ use Illuminate\Support\Facades\Route;
 // });
 // Route::get('signup',[FormValidationController::class, 'index']);
 // Route::post('signup',[FormValidationController::class, 'displayInfor']);
-Route::get('/',[PagesController::class, 'index']);
-Route::get('/delete{id}',[PagesController::class, 'destroy']);
-Route::post('/',[PagesController::class, 'addRooms']);
+// Route::get('/',[PagesController::class, 'index']);
+// Route::get('/delete{id}',[PagesController::class, 'destroy']);
+// Route::post('/',[PagesController::class, 'addRooms']);
 // Route::get('/',[PagesController::class, 'displayInfor']);
 
-// Route::get('/homepage',[PController::class, 'getIndex']);
+Route::get('/homepage',[PController::class, 'getIndex']);
 // Route::get('/',[DatabaseController::class,'getAllData']);
     
 
 
+// Route::get('/',function(){
+//     $data = DB::table('customers')->find(3);
+//     print_r($data);
+// });
