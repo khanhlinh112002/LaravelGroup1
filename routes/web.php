@@ -55,6 +55,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/homepage',[PController::class, 'getIndex']);
 Route::get('/type/{id}',[PController::class, 'getLoaiSp']);
+Route::get('/detail/{id}',[PController::class, 'getDetail']);
 Route::get('/admin',[PController::class, 'getAdmin']);
 Route::get('/adminAdd',[PController::class, 'getAdminAdd']);
 Route::post('/adminAdd',[PController::class,'postAdminAdd'])->name('admin-add-form');

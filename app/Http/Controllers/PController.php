@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Slide;
 use App\Models\Products;
+use App\Models\Comment;
 use App\Models\ProductType;
 use Facade\FlareClient\View;
 use Illuminate\Contracts\View\View as ViewView;
@@ -103,5 +104,11 @@ class PController extends Controller
         $product->delete();
         return redirect('/admin');
 }
+    public function getDetail(Request $request){
+        $sanpham = Products::where('id',$request->id)->first();
+        $splienquan = Products::where('id','<>',$sanpham->id,'and','id_type','=',$sanpham->id_type)->paginate(3);
+        $comments = Comment::where('id_product',$request->id)->get();
+        return view('Detail',compact('sanpham','splienquan','comments'));
+    }
 
 }
