@@ -93,9 +93,9 @@
 						<li><a href="index.html">Trang chủ</a></li>
 						<li><a href="#">Sản phẩm</a>
 							<ul class="sub-menu">
-								<li><a href="product_type.html">Sản phẩm 1</a></li>
-								<li><a href="product_type.html">Sản phẩm 2</a></li>
-								<li><a href="product_type.html">Sản phẩm 4</a></li>
+								@foreach($loai_sp as $item)
+								<li><a href="/type/{{$item->id}}">{{$item->name}}</a></li>
+								@endforeach
 							</ul>
 						</li>
 						<li><a href="about.html">Giới thiệu</a></li>

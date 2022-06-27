@@ -54,6 +54,17 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/',[PagesController::class, 'displayInfor']);
 
 Route::get('/homepage',[PController::class, 'getIndex']);
+Route::get('/type/{id}',[PController::class, 'getLoaiSp']);
+Route::get('/admin',[PController::class, 'getAdmin']);
+Route::get('/adminAdd',[PController::class, 'getAdminAdd']);
+Route::post('/adminAdd',[PController::class,'postAdminAdd'])->name('admin-add-form');
+Route::get('/admin-edit-form/{id}',[PController::class,'getAdminEdit']);
+Route::post('/admin-edit',[PController::class,'postAdminEdit']);
+Route::post('/admin-delete/{id}',[PController::class,'postAdminDelete']);
+
+
+// Route::get('/loai_sanpham',[PController::class, 'getLoaiSanpham']);
+
 // Route::get('/',[DatabaseController::class,'getAllData']);
     
 
