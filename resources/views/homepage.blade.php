@@ -1,7 +1,5 @@
-
-<body>
-    @extends('master')
-    @section('content')
+@extends('master');
+@section('content');
 
 <div class="fullwidthbanner-container">
 					<div class="fullwidthbanner">
@@ -49,13 +47,13 @@
 											<a href="product.html"><img src="source/image/product/{{$np->image}}" alt=""></a>
 										</div>
 										<div class="single-item-body">
-											<p class="single-item-title">Sample Woman Top</p>
+											<p class="single-item-title">{{$np->name}}</p>
 											<p class="single-item-price">
-												<span>$34.55</span>
+												<span>{{$np->unit_price}}</span>
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="add-to-cart/{{$np->id}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="detail/{{$np->id}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -83,13 +81,13 @@
 											<a href="product.html"><img src="source/image/product/{{$pp->image}}" alt=""></a>
 										</div>
 										<div class="single-item-body">
-											<p class="single-item-title">Sample Woman Top</p>
+											<p class="single-item-title">{{$pp->name}}</p>
 											<p class="single-item-price">
-												<span>$34.55</span>
+												<span>{{$pp->unit_price}}</span>
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="add-to-cart/{{$pp->id}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="detail/{{$pp->id}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -101,84 +99,6 @@
 							
 							<div class="space40">&nbsp;</div>
 							<div class="row">{{$promotion_product->links("pagination::bootstrap-4")}}</div>
-
-							<!-- <div class="row">
-								<div class="col-sm-3">
-									<div class="single-item">
-										<div class="single-item-header">
-											<a href="product.html"><img src="source/assets/dest/images/products/1.jpg" alt=""></a>
-										</div>
-										<div class="single-item-body">
-											<p class="single-item-title">Sample Woman Top</p>
-											<p class="single-item-price">
-												<span>$34.55</span>
-											</p>
-										</div>
-										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="single-item">
-										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
-
-										<div class="single-item-header">
-											<a href="product.html"><img src="source/assets/dest/images/products/2.jpg" alt=""></a>
-										</div>
-										<div class="single-item-body">
-											<p class="single-item-title">Sample Woman Top</p>
-											<p class="single-item-price">
-												<span class="flash-del">$34.55</span>
-												<span class="flash-sale">$33.55</span>
-											</p>
-										</div>
-										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="single-item">
-										<div class="single-item-header">
-											<a href="product.html"><img src="source/assets/dest/images/products/3.jpg" alt=""></a>
-										</div>
-										<div class="single-item-body">
-											<p class="single-item-title">Sample Woman Top</p>
-											<p class="single-item-price">
-												<span>$34.55</span>
-											</p>
-										</div>
-										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="single-item">
-										<div class="single-item-header">
-											<a href="product.html"><img src="source/assets/dest/images/products/3.jpg" alt=""></a>
-										</div>
-										<div class="single-item-body">
-											<p class="single-item-title">Sample Woman Top</p>
-											<p class="single-item-price">
-												<span>$34.55</span>
-											</p>
-										</div>
-										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-							</div> -->
 						</div> <!-- .beta-products-list -->
 					</div>
 				</div> <!-- end section with sidebar and main content -->
@@ -187,12 +107,4 @@
 			</div> <!-- .main-content -->
 		</div> <!-- #content -->
 	</div> <!-- .container -->
-
-
-
-
 @endsection
-
-</body>
-
-</html>

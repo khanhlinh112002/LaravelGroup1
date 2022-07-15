@@ -6,11 +6,12 @@ use App\Http\Controllers\FormValidationController;
 use App\Http\Controllers\PController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\DatabaseController;
-
-
+use App\Http\Controllers\APIController;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Requests\addRoom;
 
 
 /*
@@ -62,9 +63,18 @@ Route::post('/adminAdd',[PController::class,'postAdminAdd'])->name('admin-add-fo
 Route::get('/admin-edit-form/{id}',[PController::class,'getAdminEdit']);
 Route::post('/admin-edit',[PController::class,'postAdminEdit']);
 Route::post('/admin-delete/{id}',[PController::class,'postAdminDelete']);
+Route::get('add-to-cart/{id}',[PController::class, 'getAddToCart'])->name('themgiohang');
+Route::get('del-cart/{id}', [PController::class, 'getDelItemCart'])->name('xoagiohang');																								
+Route::get('/loai_sanpham',[PController::class, 'getLoaiSanpham']);
+Route::get('/login',[UserController::class,'getLogin']);
+Route::post('/login',[UserController::class,'Login']);
+Route::get('/logout', [UserController::class, 'Logout']);
+Route::get('/register',[UserController::class,'getRegister']);
+Route::post('/register',[UserController::class,'Register']);
+Route::get('check-out', [PController::class, 'getCheckout'])->name('dathang');
+Route::post('check-out', [PController::class, 'postCheckout'])->name('dathang');
 
 
-// Route::get('/loai_sanpham',[PController::class, 'getLoaiSanpham']);
 
 // Route::get('/',[DatabaseController::class,'getAllData']);
     
@@ -74,3 +84,5 @@ Route::post('/admin-delete/{id}',[PController::class,'postAdminDelete']);
 //     $data = DB::table('customers')->find(3);
 //     print_r($data);
 // });
+
+

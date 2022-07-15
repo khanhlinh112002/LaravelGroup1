@@ -5,11 +5,22 @@ use App\Models\Slide;
 use App\Models\Products;
 use App\Models\Comment;
 use App\Models\ProductType;
+use App\Models\Wishlist;
+
 use Facade\FlareClient\View;
 use Illuminate\Contracts\View\View as ViewView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View as FacadesView;
 use App\Http\Requests\AddProduct;
+use App\Http\Requests;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Bill;
+use App\Models\BillDetail;
+use App\Models\Customer;
+
 
 
 class PController extends Controller
@@ -42,6 +53,7 @@ class PController extends Controller
         
     }
     public function getAdminAdd(){
+        
         return view('formAdd');
     }
     public function postAdminAdd(Request $request){
@@ -110,5 +122,91 @@ class PController extends Controller
         $comments = Comment::where('id_product',$request->id)->get();
         return view('Detail',compact('sanpham','splienquan','comments'));
     }
+    						
+	public function getAddToCart(Request $req, $id){	
+        $product = Products::find($id);					
+        $oldCart = Session('cart')?Session::get('cart'):null;					
+        $cart = new Cart($oldCart);					
+        $cart->add($product,$id);					
+        $req->session()->put('cart', $cart);	
+  
+        return redirect()->back();					
+    }					
+                    
+    public function getDelItemCart($id)
+    {
+    $oldCart = Session::has('cart')?Session :: get('cart'):null;
+    $cart = new Cart($oldCart);
+    $cart->removeItem($id);
+   
+    if(count($cart->items) > 0 && Session::has('cart')){
+        Session :: put('cart',$cart);
+    }else{             
+        Session :: forget('cart');
+    return redirect()->back();
 
+    }   
+    }
+       //--------------- CHECKOUT --------------//
+       public function getCheckout()
+       {
+           if (Session::has('cart')) {
+               $oldCart = Session::get('cart');
+               $cart = new Cart($oldCart);
+               return view('checkout')->with(['cart' => Session::get('cart'), 'product_cart' => $cart->items, 'totalPrice' => $cart->totalPrice, 'totalQty' => $cart->totalQty]);;
+           } else {
+               return redirect('homepage');
+           }
+       }
+   
+       public function postCheckout(Request $req)
+       {
+           $cart = Session::get('cart');
+           $customer = new Customer;
+           $customer->name = $req->full_name;
+           $customer->gender = $req->gender;
+           $customer->email = $req->email;
+           $customer->address = $req->address;
+           $customer->phone_number = $req->phone;
+   
+           if (isset($req->notes)) {
+               $customer->note = $req->notes;
+           } else {
+               $customer->note = "Không có ghi chú gì";
+           }
+   
+           $customer->save();
+   
+           $bill = new Bill;
+           $bill->id_customer = $customer->id;
+           $bill->date_order = date('Y-m-d');
+           $bill->total = $cart->totalPrice;
+           $bill->payment = $req->payment_method;
+           if (isset($req->notes)) {
+               $bill->note = $req->notes;
+           } else {
+               $bill->note = "Không có ghi chú gì";
+           }
+           $bill->save();
+   
+           foreach ($cart->items as $key => $value) {
+               $bill_detail = new BillDetail;
+               $bill_detail->id_bill = $bill->id;
+               $bill_detail->id_product = $key; //$value['item']['id'];
+               $bill_detail->quantity = $value['qty'];
+               $bill_detail->unit_price = $value['price'] / $value['qty'];
+               $bill_detail->save();
+           }
+   
+           Session::forget('cart');
+           $wishlists = Wishlist::where('id_user', Session::get('user')->id)->get();
+           if (isset($wishlists)) {
+               foreach ($wishlists as $element) {
+                   $element->delete();
+               }
+           }
+           echo '<script>alert("Đặt hàng thành công");window.location.assign("homepage");</script>';
+
+       }
 }
+

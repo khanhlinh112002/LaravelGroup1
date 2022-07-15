@@ -53,7 +53,9 @@
 
             <div class="form-group">
                 <img id="preview-image-before-upload"
-                    src="https://www.riobeauty.co.uk/images/product_image_not_found.gif" alt="preview image"
+                
+                    src="source/image/product/.jpg" alt="preview image"
+                    
                     style="max-height: 250px;">
                 <script type="text/javascript">
                 $(document).ready(function(e) {

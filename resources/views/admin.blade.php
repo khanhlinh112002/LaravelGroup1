@@ -1,8 +1,8 @@
 @extends('master')
 @section('content')
 <div class="container beta-relative">
-    <div class="container">
-        <div class="col-12 col-md-6" style="background: red;color:white">Số sản phẩm: {{count($products)}}</div>
+    <div class="container ">
+        <div class="col-12 col-md-6 " style="background: red;color:white">Số sản phẩm: {{count($products)}}</div>
         <div class="col-12 col-md-6" style="background: blue;color:white">Đã bán: <br />
             <p>Tổng:</p>
             <p>Hôm nay: 1</p>

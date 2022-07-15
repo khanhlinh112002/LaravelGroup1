@@ -36,12 +36,9 @@ class PagesController extends Controller{
         return view('index');
     }
     public function destroy($id){
-        // if(isset($_SESSION['rooms']))
-        // $arr = $_SESSION['rooms'];
-        
-        
-        // return view('index')->with('arr',$arr);
-        dd($id);
+        if(isset($_SESSION['rooms']))
+        $arr = $_SESSION['rooms'];
+        return view('index')->with('arr',$arr);
     }
 
 }
